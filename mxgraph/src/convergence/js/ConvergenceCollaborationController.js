@@ -3,20 +3,24 @@ class ConvergenceCollaborationController {
   static GRAPH_PARAM = "diagram";
 
   static FIRST_NAMES = [
-    "Timid", "Crazy", "Slick", "Sly", "Ingenious", "Furious",
-    "Big", "Little", "Giant", "Tiny", "Mighty", "Fearsome"
+    "Usuario"
   ];
   static LAST_NAMES = [
-    "Bear", "Dog", "Octopus", "Flamingo", "Kitten", "Kangaroo",
+    "Oso", "Perro", "Pulpo", "Flamengo", "Gato", "Canguro",
     "Aardvark", "Alligator", "Dolphin", "Elephant", "Badger", "Giraffe",
   ];
+  static asignarNum(){
+    let num=Math.random()*(999 - 1) + 1;
+    let text=num.toString(num)
+    return text;
+  }
 
   static generateUserName() {
     const fName = Math.floor(Math.random() * ConvergenceCollaborationController.FIRST_NAMES.length);
     const lName = Math.floor(Math.random() * ConvergenceCollaborationController.LAST_NAMES.length);
     return ConvergenceCollaborationController.FIRST_NAMES[fName] +
       " " +
-      ConvergenceCollaborationController.LAST_NAMES[lName];
+      ConvergenceCollaborationController.FIRST_NAMES[lName]
   }
 
   static _getGraphId() {
@@ -32,6 +36,7 @@ class ConvergenceCollaborationController {
 
   static _createUUID() {
     let dt = new Date().getTime();
+    //URL a compartir generar variable
     const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       const r = (dt + Math.random() * 16) % 16 | 0;
       dt = Math.floor(dt / 16);

@@ -65,7 +65,7 @@ class ChatWindow extends UiComponent {
   }
 
   _init() {
-    const title = $("<div>", {class: "chat-window-title"}).text("Chat Messages");
+    const title = $("<div>", {class: "chat-window-title"}).text("Chat contribuidores");
     const close = $("<i>", {class: "chat-window-close fa fa-times"});
     close.on("click", () => this._options.onClose());
     title.append(close);
@@ -183,7 +183,7 @@ class ChatMessageInput extends UiComponent {
   }
 
   _init() {
-    this._el.attr("placeholder", "Type a message...");
+    this._el.attr("placeholder", "Escriba un mensaje...");
     this._el.on("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();

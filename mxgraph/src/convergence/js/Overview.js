@@ -10,7 +10,7 @@ class Overview extends UiComponent {
 
   _init() {
 
-    const title = $("<div class='overview-title'>Overview</div>");
+    const title = $("<div class='overview-title'>Vista General</div>");
     this._el.append(title);
 
     this._overview = $("<div />", {class: "mx-overview"});

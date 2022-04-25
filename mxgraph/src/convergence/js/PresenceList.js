@@ -5,7 +5,7 @@ class PresenceList extends UiComponent {
     this._options = options;
     this._sessions = {};
 
-    const title = $("<div class='presence-title'>Users</div>");
+    const title = $("<div class='presence-title'>Usuarios</div>");
     this._el.append(title);
 
     this._sessionList = $("<div />", {class: "session-list"});
@@ -60,7 +60,7 @@ class SessionItem extends UiComponent {
 
   _init() {
     const displayName = this._options.displayName || this._options.username;
-    const text = this._options.local ? displayName + " (You)" : displayName;
+    const text = this._options.local ? displayName + " (Tú)" : displayName;
     this._el.append($("<div>", {class: "session-color"}).css("background-color", this._options.color));
     this._el.append($("<div>", {class: "session-name"}).html(text));
   }
