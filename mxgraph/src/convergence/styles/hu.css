@@ -1,4 +1,4 @@
-.chat-control {
+.hu-control {
     display: inline-block;
     position: absolute;
     right: 265px;
@@ -7,7 +7,7 @@
     z-index: 100000;
 }
 
-.chat-badge {
+.hu-badge {
     
     position: relative;
     top: -3px;
@@ -41,7 +41,7 @@
     to { background-color: #E20000; }
 }
 
-.chat-icon {
+.hu-icon {
     border: 1px solid rgb(0, 0, 0);
     align-items: center;
     padding: 4px;
@@ -49,13 +49,13 @@
     background-color: #ff7777;
 }
 
-.chat-icon-open {
+.hu-icon-open {
     background: darkgray;
     color: white;
 }
 
 
-.chat-window {
+.hu-window {
     position: fixed;
     bottom: 29px;
     right: 260px;
@@ -69,7 +69,7 @@
     flex-direction: column;
 }
 
-.chat-window-title {
+.hu-window-title {
     text-align: center;
 
     border: 1px solid lightgray;
@@ -82,39 +82,39 @@
     text-shadow: 0 -1px 0 #000;
 }
 
-.chat-window-close {
+.hu-window-close {
     float: right;
     margin: 4px 4px 0 0;
     cursor: pointer;
 }
 
-.chat-window-close:hover {
+.hu-window-close:hover {
     color: red;
 }
 
-.chat-messages {
+.hu-messages {
     background: #f9f7f7;
     flex: 1;
     overflow: auto;
 }
 
-.chat-time {
+.hu-time {
     float: right;
     font-size: 12px;
 }
 
-.chat-user {
+.hu-user {
     font-size: 12px;
 }
 
-.chat-message {
+.hu-message {
     border-left: 3px solid;
     padding: 0 5px 0 5px;
     border-bottom: 1px solid lightgrey;
     font-size: 13px;
 }
 
-.chat-input {
+.hu-input {
     width: 240px;
     padding: 5px;
     z-index: 4000;
@@ -124,6 +124,6 @@
     border: radius 1px;
 }
 
-.chat-input:focus {
+.hu-input:focus {
     outline: none;
 }

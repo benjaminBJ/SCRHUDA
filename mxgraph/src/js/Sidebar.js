@@ -1427,15 +1427,15 @@ Sidebar.prototype.addUmlPalette = function(expand)
 			
 			cell.insertEdge(edge, true);
 			
-			return sb.createVertexTemplateFromCells([cell, edge], 160, 120, 'Composite State');
+			return sb.createVertexTemplateFromCells([cell, edge], 160, 120, 'Composición');
 		}),
 		this.addEntry('uml activity condition', function()
 		{
-	    	var cell = new mxCell('Condición', new mxGeometry(0, 0, 80, 40), 'shape=diamond;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=13;fontColor=#000000');
+	    	var cell = new mxCell('Condición', new mxGeometry(0, 0, 100, 80), 'shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=13;fontColor=#000000');
 	    	cell.vertex = true;
 	    	
 			var edge1 = new mxCell('No', new mxGeometry(0, 0, 0, 0), 'edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;fontSize=13');
-			edge1.geometry.setTerminalPoint(new mxPoint(180, 20), false);
+			edge1.geometry.setTerminalPoint(new mxPoint(160, 40), false);
 			edge1.geometry.relative = true;
 			edge1.geometry.x = -1;
 			edge1.edge = true;
@@ -1443,14 +1443,14 @@ Sidebar.prototype.addUmlPalette = function(expand)
 			cell.insertEdge(edge1, true);
 	    	
 			var edge2 = new mxCell('Si', new mxGeometry(0, 0, 0, 0), 'edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=top;endArrow=open;endSize=8;strokeColor=#000000;fontSize=13');
-			edge2.geometry.setTerminalPoint(new mxPoint(40, 100), false);
+			edge2.geometry.setTerminalPoint(new mxPoint(50, 120), false);
 			edge2.geometry.relative = true;
 			edge2.geometry.x = -1;
 			edge2.edge = true;
 			
 			cell.insertEdge(edge2, true);
 			
-			return sb.createVertexTemplateFromCells([cell, edge1, edge2], 180, 100, 'Condición');
+			return sb.createVertexTemplateFromCells([cell, edge1, edge2], 300, 100, 'Condición');
 		}),
 		this.addEntry('uml activity fork join', function()
 		{

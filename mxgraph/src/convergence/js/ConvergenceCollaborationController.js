@@ -11,16 +11,17 @@ class ConvergenceCollaborationController {
   ];
   static asignarNum(){
     let num=Math.random()*(999 - 1) + 1;
-    let text=num.toString(num)
+    let text=num.toString(num);
     return text;
   }
-
+  static num = 1;
   static generateUserName() {
     const fName = Math.floor(Math.random() * ConvergenceCollaborationController.FIRST_NAMES.length);
     const lName = Math.floor(Math.random() * ConvergenceCollaborationController.LAST_NAMES.length);
+
     return ConvergenceCollaborationController.FIRST_NAMES[fName] +
       " " +
-      ConvergenceCollaborationController.FIRST_NAMES[lName]
+      ConvergenceCollaborationController.LAST_NAMES[lName]
   }
 
   static _getGraphId() {
@@ -125,6 +126,17 @@ class ConvergenceEditorController {
         });
 
         document.body.appendChild(this._chatControl.getElement());
+
+        /*intento
+        this._huControl = new HUControl({
+          room: this._room,
+          username: this._domain.session().user().displayName,
+          sessionId: this._domain.session().sessionId(),
+          colorManager: this._activityColorManager
+        });
+
+        document.body.appendChild(this._huControl.getElement());
+        //fin intento*/
 
         this._overview = new Overview({
           graph: editor.graph,

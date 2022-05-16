@@ -1,7 +1,7 @@
-class ChatControl extends UiComponent {
+class HUControl extends UiComponent {
 
   constructor(options) {
-    super("div", "chat-control", "chat");
+    super("div", "hu-control", "hu");
     this._options = options;
     this._init();
   }
@@ -13,16 +13,16 @@ class ChatControl extends UiComponent {
 
     this._unread = 0;
 
-    this._badge = $('<div>', {class: "chat-badge"});
+    this._badge = $('<div>', {class: "hu-badge"});
     this._badge.css("visibility", "hidden");
     this._el.append(this._badge);
 
-    this._chatIcon = $("<i>", {class: "chat-icon fa fa-comments", "aria-hidden": true, text:"\tCHAT DE SESIÓN"});
-    this._chatIcon.on("click", () => this._toggle());
-    this._el.append(this._chatIcon);
+    this._huIcon = $("<i>", {class: "hu-icon fa fa-comments", "aria-hidden": true, text:"\tHISTORIAS DE SESIÓN"});
+    this._huIcon.on("click", () => this._toggle());
+    this._el.append(this._huIcon);
     
 
-    this._chatWindow = new ChatWindow({
+    this._huWindow = new HUWindow({
       room: this._options.room,
       username: this._options.username,
       sessionId: this._options.sessionId,
@@ -30,7 +30,7 @@ class ChatControl extends UiComponent {
       onClose: () => this._toggle()
     });
 
-    this._el.append(this._chatWindow._el);
+    this._el.append(this._huWindow._el);
 
     this._options.room.events()
       .pipe(filter((e) => e.name === "message"))
@@ -49,30 +49,30 @@ class ChatControl extends UiComponent {
       this._badge.text("");
       this._unread = 0;
       this._badge.css("visibility", "hidden");
-      this._chatIcon.addClass("chat-icon-open");
+      this._huIcon.addClass("hu-icon-open");
     } else {
-      this._chatIcon.removeClass("chat-icon-open");
+      this._huIcon.removeClass("hu-icon-open");
     }
-    this._chatWindow.toggle();
+    this._huWindow.toggle();
   }
 }
 
-class ChatWindow extends UiComponent {
+class HUWindow extends UiComponent {
   constructor(options) {
-    super("div", "chat-window");
+    super("div", "hu-window");
     this._visible = false;
     this._options = options;
     this._init();
   }
 
   _init() {
-    const title = $("<div>", {class: "chat-window-title"}).text("Chat Contribuidores");
-    const close = $("<i>", {class: "chat-window-close fa fa-times"});
+    const title = $("<div>", {class: "hu-window-title"}).text("HU Contribuidores");
+    const close = $("<i>", {class: "hu-window-close fa fa-times"});
     close.on("click", () => this._options.onClose());
     title.append(close);
     this._el.append(title);
 
-    this._messagePane = new ChatMessagePane({
+    this._messagePane = new HUMessagePane({
       username: this._options.username,
       color: this._options.colorManager.color(this._options.username),
       colorManager: this._options.colorManager,
@@ -80,8 +80,8 @@ class ChatWindow extends UiComponent {
     });
     this._el.append(this._messagePane._el);
 
-    this._messageInput = new ChatMessageInput({
-      chatWindow: this
+    this._messageInput = new HUMessageInput({
+      huWindow: this
     });
     this._el.append(this._messageInput._el);
 
@@ -102,10 +102,10 @@ class ChatWindow extends UiComponent {
   }
 }
 
-class ChatMessagePane extends UiComponent {
+class HUMessagePane extends UiComponent {
 
   constructor(options) {
-    super("div", "chat-messages");
+    super("div", "hu-messages");
 
     this._options = options;
     this._init();
@@ -127,7 +127,7 @@ class ChatMessagePane extends UiComponent {
 
   _appendRemoteMessage(message, user, timestamp, color) {
     const displayName = user.displayName ? user.displayName : user.username;
-    const msg = new ChatMessage({
+    const msg = new HUMessage({
       message: message,
       username: displayName,
       timestamp: timestamp,
@@ -140,7 +140,7 @@ class ChatMessagePane extends UiComponent {
   _appendLocalMessage(message) {
     const user = this._options.room.session().user();
     const displayName = user.displayName ? user.displayName : user.username;
-    const msg = new ChatMessage({
+    const msg = new HUMessage({
       message: message,
       timestamp: new Date().getTime(),
       username: displayName,
@@ -155,9 +155,9 @@ class ChatMessagePane extends UiComponent {
   }
 }
 
-class ChatMessage extends UiComponent {
+class HUMessage extends UiComponent {
   constructor(options) {
-    super("div", "chat-message");
+    super("div", "hu-message");
     this._options = options;
 
     this._init();
@@ -167,18 +167,18 @@ class ChatMessage extends UiComponent {
     const timestamp = moment(this._options.timestamp);
     this._el.css("border-left-color", this._options.color);
 
-    const header = $('<div>', {class: "chat-header"});
-    header.append($('<span>', {class: "chat-user"}).text(this._options.username));
-    header.append($('<span>', {class: "chat-time"}).text(timestamp.format("h:mm a")));
+    const header = $('<div>', {class: "hu-header"});
+    header.append($('<span>', {class: "hu-user"}).text(this._options.username));
+    header.append($('<span>', {class: "hu-time"}).text(timestamp.format("h:mm a")));
     this._el.append(header);
 
-    this._el.append($('<span>', {class: "chat-text"}).text(this._options.message));
+    this._el.append($('<span>', {class: "hu-text"}).text(this._options.message));
   }
 }
 
-class ChatMessageInput extends UiComponent {
+class HUMessageInput extends UiComponent {
   constructor(options) {
-    super("input", "chat-input");
+    super("input", "hu-input");
     this._options = options;
     this._init();
   }
@@ -197,6 +197,6 @@ class ChatMessageInput extends UiComponent {
   }
 
   _sendMessage(message) {
-    this._options.chatWindow._sendMessage(message);
+    this._options.huWindow._sendMessage(message);
   }
 }

@@ -808,12 +808,13 @@ Actions.prototype.init = function()
 			ext = '_' + mxClient.language;
 		}
 		
-		graph.openLink(RESOURCES_PATH + '/help' + ext + '.html');
+		//graph.openLink(RESOURCES_PATH + '/help' + ext + '.html');
+		graph.openLink('http://localhost:3000/');
 	});
 	
 	var showingAbout = false;
 	
-	this.put('about', new Action(mxResources.get('about') + ' Graph Editor...', function()
+	this.put('about', new Action(mxResources.get('about') + ' SCRHUDA...', function()
 	{
 		if (!showingAbout)
 		{
@@ -1263,7 +1264,8 @@ Actions.prototype.init = function()
 		if (this.layersWindow == null)
 		{
 			// LATER: Check outline window for initial placement
-			this.layersWindow = new LayersWindow(ui, document.body.offsetWidth - 280, 120, 220, 180);
+			this.layersWindow = new LayersWindow(ui, document.body.offsetWidth - 280, 120, 220, 300);
+			// this.layersWindow = new LayersWindow(ui, document.body.offsetWidth - 280, 120, 220, 180);
 			this.layersWindow.window.addListener('show', function()
 			{
 				ui.fireEvent(new mxEventObject('layers'));
