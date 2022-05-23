@@ -5600,14 +5600,14 @@ if (typeof mxVertexHandler != 'undefined')
 		{
 			// Creates a new edge label with a predefined text
 			var label = new mxCell();
-			label.value = 'Text';
-			label.style = 'text;html=1;resizable=0;points=[];'
+			label.value = 'Texto';
+			label.style = 'text;html=1;resizable=0;points=[];fillColor=none;'
 			label.geometry = new mxGeometry(0, 0, 0, 0);
 			label.vertex = true;
 			
 			if (state != null)
 			{
-				label.style += 'align=center;verticalAlign=middle;labelBackgroundColor=#ffffff;'
+				label.style += 'align=center;verticalAlign=middle;labelBackgroundColor=#ffffff;fillColor=none;'
 				label.geometry.relative = true;
 				label.connectable = false;
 				
