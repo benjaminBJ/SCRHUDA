@@ -7,7 +7,7 @@ class ShareControls extends UiComponent {
   }
 
   _init() {
-    this._share = $('<span class="geButton" title="Get a Shareable Link"><i class="fa fa-share-square"></i></span>');
+    this._share = $('<span class="geButton" title="Obtener Enlace Compartible"><i class="fa fa-share-square"></i></span>');
     this._el.append(this._share);
     this._share.on("click", () => {
       const el = document.createElement('textarea');
@@ -48,7 +48,7 @@ class ShareControls extends UiComponent {
     });
 
 
-    this._new = $('<span class="geButton" title="Open Diagrm in a New Window"><i class="fa fa-external-link-alt"></i></span>');
+    this._new = $('<span class="geButton" title="ABrir diagrama en otra Ventana"><i class="fa fa-external-link-alt"></i></span>');
     this._el.append(this._new);
     this._new.on("click", () => {
       window.open(window.location.href, "_blank");

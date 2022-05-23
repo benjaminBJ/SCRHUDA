@@ -7,7 +7,7 @@ class ConvergenceCollaborationController {
   ];
   static LAST_NAMES = [
     "Oso", "Perro", "Pulpo", "Flamengo", "Gato", "Canguro",
-    "Aardvark", "Alligator", "Dolphin", "Elephant", "Badger", "Giraffe",
+    "Delfín", "Elefante", "Girafa",
   ];
   static asignarNum(){
     let num=Math.random()*(999 - 1) + 1;
@@ -43,6 +43,7 @@ class ConvergenceCollaborationController {
       dt = Math.floor(dt / 16);
       return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
+    const uuid2='a';
     return uuid;
   }
 
@@ -75,6 +76,7 @@ class ConvergenceEditorController {
     this._domain = domain;
     this._modelId = modelId;
     this._room = null;
+    this._roomH = null;
     this._activity = null;
     this._activityColorManager = null;
   }
@@ -127,7 +129,7 @@ class ConvergenceEditorController {
 
         document.body.appendChild(this._chatControl.getElement());
 
-        /*intento
+        //intento
         this._huControl = new HUControl({
           room: this._room,
           username: this._domain.session().user().displayName,
@@ -136,7 +138,7 @@ class ConvergenceEditorController {
         });
 
         document.body.appendChild(this._huControl.getElement());
-        //fin intento*/
+        //fin intento
 
         this._overview = new Overview({
           graph: editor.graph,
@@ -186,6 +188,18 @@ class ConvergenceEditorController {
       })
       .then((room) => {
         this._room = room;
+      });
+  }
+
+  _joinHU() {
+    const id = "mxgraph.project." + this._modelId;
+    return this._domain.hu()
+      .create({id, type: "room", membership: "public", ignoreExistsError: true})
+      .then((huId) => {
+        return this._domain.hu().join(huId);
+      })
+      .then((roomH) => {
+        this._room = roomH;
       });
   }
 

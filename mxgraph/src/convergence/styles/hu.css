@@ -1,7 +1,7 @@
 .hu-control {
     display: inline-block;
     position: absolute;
-    right: 265px;
+    left: 200px;
     bottom: 5px;
     border-radius: 15px 50px;
     z-index: 100000;
@@ -19,7 +19,7 @@
     text-align: center;
     font-weight: bold;
 
-    background: #E20000;
+    background-color: #ffffff;
     color: black;
 
     margin-right: 2px;
@@ -46,11 +46,11 @@
     align-items: center;
     padding: 4px;
     width: 200px;
-    background-color: #ff7777;
+    background-color: #fea974;
 }
 
 .hu-icon-open {
-    background: darkgray;
+    background: rgb(255, 117, 43);
     color: white;
 }
 
@@ -58,7 +58,7 @@
 .hu-window {
     position: fixed;
     bottom: 29px;
-    right: 260px;
+    left: 200px;
     width: 250px;
     height: 300px;
 
@@ -111,6 +111,7 @@
     border-left: 3px solid;
     padding: 0 5px 0 5px;
     border-bottom: 1px solid lightgrey;
+    background-color: #f9f7f7;
     font-size: 13px;
 }
 

@@ -1,14 +1,15 @@
 .chat-control {
     display: inline-block;
     position: absolute;
-    right: 265px;
+    right: 200px;
     bottom: 5px;
     border-radius: 15px 50px;
     z-index: 100000;
+    font-family: Sans-serif;
 }
 
 .chat-badge {
-    
+    font-family: Sans-serif;
     position: relative;
     top: -3px;
     width: 15px;
@@ -42,14 +43,17 @@
 }
 
 .chat-icon {
+    font-family: Sans-serif;
     border: 1px solid rgb(0, 0, 0);
     align-items: center;
     padding: 4px;
     width: 200px;
-    background-color: #ff7777;
+    background-color: #fea974;
+    
 }
 
 .chat-icon-open {
+    font-family: Sans-serif;
     background: darkgray;
     color: white;
 }
@@ -58,7 +62,7 @@
 .chat-window {
     position: fixed;
     bottom: 29px;
-    right: 260px;
+    right: 200px;
     width: 250px;
     height: 300px;
 

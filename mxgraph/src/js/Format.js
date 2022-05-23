@@ -388,6 +388,7 @@ Format.prototype.refresh = function()
 			img.style.border = '1px solid transparent';
 			img.style.padding = '1px';
 			img.style.opacity = 0.5;
+			img.style.backgroundColor = 'red';
 			label.appendChild(img)
 			
 			mxEvent.addListener(img, 'click', function()

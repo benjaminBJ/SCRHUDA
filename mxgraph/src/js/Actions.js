@@ -809,7 +809,7 @@ Actions.prototype.init = function()
 		}
 		
 		//graph.openLink(RESOURCES_PATH + '/help' + ext + '.html');
-		graph.openLink('http://localhost:3000/');
+		graph.openLink('https://frontend.turing.edu/lessons/module-3/user-stories.html');
 	});
 	
 	var showingAbout = false;

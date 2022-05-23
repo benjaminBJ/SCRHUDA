@@ -168,8 +168,9 @@ class HUMessage extends UiComponent {
     this._el.css("border-left-color", this._options.color);
 
     const header = $('<div>', {class: "hu-header"});
-    header.append($('<span>', {class: "hu-user"}).text(this._options.username));
+    //header.append($('<span>', {class: "hu-user"}).text(this._options.username));
     header.append($('<span>', {class: "hu-time"}).text(timestamp.format("h:mm a")));
+    header.append('a');
     this._el.append(header);
 
     this._el.append($('<span>', {class: "hu-text"}).text(this._options.message));
@@ -182,15 +183,16 @@ class HUMessageInput extends UiComponent {
     this._options = options;
     this._init();
   }
-
+  
   _init() {
-    this._el.attr("placeholder", "Escriba un mensaje...");
+    const contador=0;
+    this._el.attr("value", "HU 0 - " + (contador));
     this._el.on("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
         e.stopPropagation();
         this._sendMessage(this._el.val());
-        this._el.val("");
+        this._el.val("HU 0 - ");
         return false;
       }
     });
