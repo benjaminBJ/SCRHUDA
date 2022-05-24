@@ -7,8 +7,8 @@
  * 2. Update the CONVERGENCE_URL to point to you Convergence server and domain.
  */
 const MxGraphConfig = {
-  CONVERGENCE_URL: 'http://localhost:8000/api/realtime/convergence/default',
-  COLLECTION_ID: "mxgraph"
+  CONVERGENCE_URL: "http://localhost:8000/api/realtime/convergence/default",
+  COLLECTION_ID: "mxgraph",
 };
 
 window.MxGraphConfig = MxGraphConfig;

@@ -7,7 +7,7 @@
 function Sidebar(editorUi, container) {
   this.editorUi = editorUi;
   this.container = container;
-  this.palettes = new Object(); 
+  this.palettes = new Object();
   this.taglist = new Object();
   this.showTooltips = true;
   this.graph = editorUi.createTemporaryGraph(

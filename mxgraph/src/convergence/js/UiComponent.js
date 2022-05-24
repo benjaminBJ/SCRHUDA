@@ -1,7 +1,6 @@
 class UiComponent {
-
   constructor(tag, className, id) {
-    this._el = $(`<${tag} />`, {class: className, id: id});
+    this._el = $(`<${tag} />`, { class: className, id: id });
   }
 
   getElement() {
@@ -12,7 +11,5 @@ class UiComponent {
     this._el.remove();
   }
 
-  _init() {
-
-  }
+  _init() {}
 }

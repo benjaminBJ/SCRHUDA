@@ -69,7 +69,7 @@ class SessionItem extends UiComponent {
       )
     );
     this._el.append($("<div>", { class: "session-name" }).html(text));
-    this._el.append($("<button>", {class: "edit"}));
+    this._el.append($("<button>", { class: "edit" }));
   }
   //editar nombre de usuario
   _edit() {

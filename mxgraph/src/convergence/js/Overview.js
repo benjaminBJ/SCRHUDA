@@ -1,7 +1,6 @@
 class Overview extends UiComponent {
-
   constructor(options) {
-    super("div", 'presence-pane');
+    super("div", "presence-pane");
     this._options = options;
     this._viewports = {};
 
@@ -9,17 +8,18 @@ class Overview extends UiComponent {
   }
 
   _init() {
-
     const title = $("<div class='overview-title'>Vista General</div>");
     this._el.append(title);
 
-    this._overview = $("<div />", {class: "mx-overview"});
+    this._overview = $("<div />", { class: "mx-overview" });
     this._el.append(this._overview);
 
     this._outline = new mxOutline(this._options.graph, this._overview[0]);
 
     setTimeout(() => {
-      const participants = this._options.activity.participants().sort((a, b) => a.local ? -1 : 1);
+      const participants = this._options.activity
+        .participants()
+        .sort((a, b) => (a.local ? -1 : 1));
       participants.forEach((participant) => {
         if (!participant.local) {
           this._addSession(participant);
@@ -56,11 +56,15 @@ class Overview extends UiComponent {
         const height = graph.container.clientHeight / scale;
         const width = graph.container.clientWidth / scale;
 
-        this._options.activity.setState("viewport", {x, y, height, width})
+        this._options.activity.setState("viewport", { x, y, height, width });
       };
 
       const view = this._options.graph.getView();
-      mxEvent.addListener(this._options.graph.container, 'scroll', updateHandler);
+      mxEvent.addListener(
+        this._options.graph.container,
+        "scroll",
+        updateHandler
+      );
       view.addListener(mxEvent.SCALE, updateHandler);
       view.addListener(mxEvent.TRANSLATE, updateHandler);
       view.addListener(mxEvent.SCALE_AND_TRANSLATE, updateHandler);
@@ -69,9 +73,13 @@ class Overview extends UiComponent {
 
   _addSession(participant) {
     const color = this._options.colorManager.color(participant.user.username);
-    const viewport = new mxRectangleShape(new mxRectangle(0, 0, 10, 10), "none", color);
+    const viewport = new mxRectangleShape(
+      new mxRectangle(0, 0, 10, 10),
+      "none",
+      color
+    );
     viewport.dialect = this._outline.outline.dialect;
-    const container = this._outline.outline.getView().getOverlayPane()
+    const container = this._outline.outline.getView().getOverlayPane();
     viewport.init(container);
 
     this._viewports[participant.sessionId] = viewport;
@@ -106,4 +114,3 @@ class Overview extends UiComponent {
     }
   }
 }
-
