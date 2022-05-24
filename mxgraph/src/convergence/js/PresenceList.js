@@ -1,20 +1,21 @@
 class PresenceList extends UiComponent {
-
   constructor(options) {
-    super("div", 'presence-pane');
+    super("div", "presence-pane");
     this._options = options;
     this._sessions = {};
 
-    const title = $("<div class='presence-title'>Usuarios</div>");
+    const title = $("<div class='presence-title'>Usuarios colaborando</div>");
     this._el.append(title);
 
-    this._sessionList = $("<div />", {class: "session-list"});
+    this._sessionList = $("<div />", { class: "session-list" });
     this._el.append(this._sessionList);
     this._init();
   }
 
   _init() {
-    const participants = this._options.activity.participants().sort((a, b) => a.local ? -1 : 1);
+    const participants = this._options.activity
+      .participants()
+      .sort((a, b) => (a.local ? -1 : 1));
     participants.forEach((participant) => {
       this._addSession(participant);
     });
@@ -30,13 +31,14 @@ class PresenceList extends UiComponent {
 
   _addSession(participant) {
     const color = this._options.colorManager.color(participant.user.username);
-    const displayName = participant.user.displayName || participant.user.username;
+    const displayName =
+      participant.user.displayName || participant.user.username;
     const session = new SessionItem({
       local: participant.local,
       username: participant.username,
       displayName: displayName,
       sessionId: participant.sessionId,
-      color: color
+      color: color,
     });
 
     this._sessions[participant.sessionId] = session;
@@ -51,9 +53,8 @@ class PresenceList extends UiComponent {
 }
 
 class SessionItem extends UiComponent {
-
   constructor(options) {
-    super("div", 'session-presence');
+    super("div", "session-presence");
     this._options = options;
     this._init();
   }
@@ -61,10 +62,25 @@ class SessionItem extends UiComponent {
   _init() {
     const displayName = this._options.displayName || this._options.username;
     const text = this._options.local ? displayName + " (Tú)" : displayName;
-    this._el.append($("<div>", {class: "session-color"}).css("background-color", this._options.color));
-    this._el.append($("<div>", {class: "session-name"}).html(text));
+    this._el.append(
+      $("<div>", { class: "session-color" }).css(
+        "background-color",
+        this._options.color
+      )
+    );
+    this._el.append($("<div>", { class: "session-name" }).html(text));
+    this._el.append($("<button>", {class: "edit"}));
   }
-
+  //editar nombre de usuario
+  _edit() {
+    const displayName = this._options.displayName || this._options.username;
+    const text = this._options.local ? displayName + " (Tú)" : displayName;
+    this._el.append(
+      $("<i>", { class: "fa fa-comments" }).css(
+        "background-color",
+        this._options.color
+      )
+    );
+    this._el.append($("<div>", { class: "session-name" }).html(text));
+  }
 }
-
-

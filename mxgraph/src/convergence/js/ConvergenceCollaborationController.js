@@ -79,6 +79,7 @@ class ConvergenceEditorController {
     this._roomH = null;
     this._activity = null;
     this._activityColorManager = null;
+    this._login = null;
   }
 
   init() {
@@ -139,7 +140,16 @@ class ConvergenceEditorController {
 
         document.body.appendChild(this._huControl.getElement());
         //fin intento
-
+        
+        /*intento login
+        this._login = new LoginDialog({
+          room: this._room,
+          username: this._domain.session().user().displayName,
+          sessionId: this._domain.session().sessionId(),
+          colorManager: this._activityColorManager
+        });
+        document.body.appendChild(this._login.getElement());
+        //fin intento*/
         this._overview = new Overview({
           graph: editor.graph,
           activity: this._activity,

@@ -1,5 +1,4 @@
 class HUControl extends UiComponent {
-
   constructor(options) {
     super("div", "hu-control", "hu");
     this._options = options;
@@ -7,32 +6,36 @@ class HUControl extends UiComponent {
   }
 
   _init() {
-    const {filter} = rxjs.operators;
+    const { filter } = rxjs.operators;
 
     this._open = false;
 
     this._unread = 0;
 
-    this._badge = $('<div>', {class: "hu-badge"});
+    this._badge = $("<div>", { class: "hu-badge" });
     this._badge.css("visibility", "hidden");
     this._el.append(this._badge);
 
-    this._huIcon = $("<i>", {class: "hu-icon fa fa-comments", "aria-hidden": true, text:"\tHISTORIAS DE SESIÓN"});
+    this._huIcon = $("<i>", {
+      class: "hu-icon fa fa-sticky-note",
+      "aria-hidden": true,
+      text: "\tHISTORIAS DE SESIÓN",
+    });
     this._huIcon.on("click", () => this._toggle());
     this._el.append(this._huIcon);
-    
 
     this._huWindow = new HUWindow({
       room: this._options.room,
       username: this._options.username,
       sessionId: this._options.sessionId,
       colorManager: this._options.colorManager,
-      onClose: () => this._toggle()
+      onClose: () => this._toggle(),
     });
 
     this._el.append(this._huWindow._el);
 
-    this._options.room.events()
+    this._options.room
+      .events()
       .pipe(filter((e) => e.name === "message"))
       .subscribe(() => {
         if (!this._open) {
@@ -66,8 +69,10 @@ class HUWindow extends UiComponent {
   }
 
   _init() {
-    const title = $("<div>", {class: "hu-window-title"}).text("HU Contribuidores");
-    const close = $("<i>", {class: "hu-window-close fa fa-times"});
+    const title = $("<div>", { class: "hu-window-title" }).text(
+      "HU Contribuidores"
+    );
+    const close = $("<i>", { class: "hu-window-close fa fa-times" });
     close.on("click", () => this._options.onClose());
     title.append(close);
     this._el.append(title);
@@ -76,12 +81,12 @@ class HUWindow extends UiComponent {
       username: this._options.username,
       color: this._options.colorManager.color(this._options.username),
       colorManager: this._options.colorManager,
-      room: this._options.room
+      room: this._options.room,
     });
     this._el.append(this._messagePane._el);
 
     this._messageInput = new HUMessageInput({
-      huWindow: this
+      huWindow: this,
     });
     this._el.append(this._messageInput._el);
 
@@ -98,12 +103,11 @@ class HUWindow extends UiComponent {
   }
 
   _sendMessage(message) {
-    this._options.room.send(message).catch(e => console.log(e));
+    this._options.room.send(message).catch((e) => console.log(e));
   }
 }
 
 class HUMessagePane extends UiComponent {
-
   constructor(options) {
     super("div", "hu-messages");
 
@@ -112,7 +116,7 @@ class HUMessagePane extends UiComponent {
   }
 
   _init() {
-    const {filter} = rxjs.operators;
+    const { filter } = rxjs.operators;
     this._options.room
       .events()
       .pipe(filter((e) => e.name === "message"))
@@ -121,7 +125,8 @@ class HUMessagePane extends UiComponent {
           e.message,
           e.user,
           e.timestamp,
-          this._options.colorManager.color(e.user.username))
+          this._options.colorManager.color(e.user.username)
+        );
       });
   }
 
@@ -131,10 +136,9 @@ class HUMessagePane extends UiComponent {
       message: message,
       username: displayName,
       timestamp: timestamp,
-      color: color
+      color: color,
     });
     this._append(msg);
-
   }
 
   _appendLocalMessage(message) {
@@ -144,7 +148,7 @@ class HUMessagePane extends UiComponent {
       message: message,
       timestamp: new Date().getTime(),
       username: displayName,
-      color: this._options.color
+      color: this._options.color,
     });
     this._append(msg);
   }
@@ -167,13 +171,17 @@ class HUMessage extends UiComponent {
     const timestamp = moment(this._options.timestamp);
     this._el.css("border-left-color", this._options.color);
 
-    const header = $('<div>', {class: "hu-header"});
+    const header = $("<div>", { class: "hu-header" });
     //header.append($('<span>', {class: "hu-user"}).text(this._options.username));
-    header.append($('<span>', {class: "hu-time"}).text(timestamp.format("h:mm a")));
-    header.append('a');
+    header.append(
+      $("<span>", { class: "hu-time" }).text(timestamp.format("h:mm a"))
+    );
+    header.append("a");
     this._el.append(header);
 
-    this._el.append($('<span>', {class: "hu-text"}).text(this._options.message));
+    this._el.append(
+      $("<span>", { class: "hu-text" }).text(this._options.message)
+    );
   }
 }
 
@@ -183,10 +191,10 @@ class HUMessageInput extends UiComponent {
     this._options = options;
     this._init();
   }
-  
+
   _init() {
-    const contador=0;
-    this._el.attr("value", "HU 0 - " + (contador));
+    const contador = 0;
+    this._el.attr("value", "HU 0 - " + contador);
     this._el.on("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();

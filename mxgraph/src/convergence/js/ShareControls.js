@@ -28,7 +28,7 @@ class ShareControls extends UiComponent {
         document.getSelection().addRange(selected);
       }
 
-      toastr["success"]("URL Copiada");
+      toastr["success"]("URL Copiada!");
       toastr.options = {
         "closeButton": false,
         "debug": false,

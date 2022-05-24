@@ -75,6 +75,8 @@
     color: #666;
     box-shadow: none;
     cursor: not-allowed;
+    position: absolute;
+    left: 100px;
 }
 
 .joint-login-dialog .hint { 

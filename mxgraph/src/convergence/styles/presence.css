@@ -41,3 +41,6 @@
 .session-name {
     display: inline-block;
 }
+.edit {
+    position: static;
+}
