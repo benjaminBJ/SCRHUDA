@@ -69,7 +69,9 @@ class SessionItem extends UiComponent {
       )
     );
     this._el.append($("<div>", { class: "session-name" }).html(text));
-    this._el.append($("<button>", { class: "edit" }));
+    if(this._options.local){
+      this._el.append($("<button>", { class: "edit" ,text: "Editar"}));
+    } 
   }
   //editar nombre de usuario
   _edit() {
@@ -80,7 +82,7 @@ class SessionItem extends UiComponent {
         "background-color",
         this._options.color
       )
-    );
+    ); 
     this._el.append($("<div>", { class: "session-name" }).html(text));
   }
 }

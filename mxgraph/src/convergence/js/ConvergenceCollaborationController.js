@@ -13,25 +13,25 @@ class ConvergenceCollaborationController {
     "Elefante",
     "Girafa",
   ];
-  static asignarNum() {
-    let num = Math.random() * (999 - 1) + 1;
-    let text = num.toString(num);
-    return text;
-  }
   static num = 1;
-  static generateUserName() {
+  static generateUserName(nombre) {
     const fName = Math.floor(
       Math.random() * ConvergenceCollaborationController.FIRST_NAMES.length
     );
     const lName = Math.floor(
       Math.random() * ConvergenceCollaborationController.LAST_NAMES.length
     );
-
-    return (
-      ConvergenceCollaborationController.FIRST_NAMES[fName] +
-      " " +
-      ConvergenceCollaborationController.LAST_NAMES[lName]
-    );
+    if(nombre.length > 1){
+      return nombre;
+    }
+    else{
+      return (
+        ConvergenceCollaborationController.FIRST_NAMES[fName] +
+        " " +
+        ConvergenceCollaborationController.LAST_NAMES[lName]
+      );
+    }
+    
   }
 
   static _getGraphId() {
@@ -74,8 +74,11 @@ class ConvergenceCollaborationController {
     this._url = url;
   }
 
-  connect() {
-    const displayName = ConvergenceCollaborationController.generateUserName();
+  connect(nombre) {
+    if (urlParams["user"] != null){
+      nombre=urlParams["user"];
+    }
+    const displayName = ConvergenceCollaborationController.generateUserName(nombre);
     return Convergence.connectAnonymously(this._url, displayName).then(
       (domain) => {
         this._domain = domain;
@@ -200,7 +203,7 @@ class ConvergenceEditorController {
       .openAutoCreate({
         id: this._modelId,
         collection: MxGraphConfig.COLLECTION_ID,
-        ephemeral: true,
+        ephemeral: false, //REVISAR
         data: Serializer.serializeMxGraphModel(new mxGraphModel()),
       })
       .then((model) => {

@@ -89,7 +89,6 @@ function Sidebar(editorUi, container) {
     new Image().src = IMAGE_PATH + "/tooltip.png";
   }
 }
-
 /**
  * Adds all palettes to the sidebar.
  */
@@ -905,6 +904,419 @@ Sidebar.prototype.insertSearchHint = function (
     div.appendChild(err);
   }
 };
+/**
+ * Adds the Diagrama de actividades palette to the sidebar.
+ */
+ Sidebar.prototype.addUmlPalette = function (expand) {
+  // Avoids having to bind all functions to "this"
+  var sb = this;
+
+  // Reusable cells
+  var field = new mxCell(
+    "+ field: type",
+    new mxGeometry(0, 0, 100, 26),
+    "text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;"
+  );
+  field.vertex = true;
+
+  var divider = new mxCell(
+    "",
+    new mxGeometry(0, 0, 40, 8),
+    "line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;"
+  );
+  divider.vertex = true;
+
+  // Default tags
+  var dt = "uml static class ";
+
+  var fns = [
+    this.addEntry("uml activity state start", function () {
+      var cell = new mxCell(
+        "",
+        new mxGeometry(0, 0, 30, 30),
+        "ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#000000;fontColor=#000000"
+      );
+      cell.vertex = true;
+
+      var edge = new mxCell(
+        "",
+        new mxGeometry(0, 0, 0, 0),
+        "edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;fontColor=#000000"
+      );
+      /*
+			edge.geometry.setTerminalPoint(new mxPoint(15, 90), false);
+			edge.geometry.relative = true;
+			edge.edge = true;
+			cell.insertEdge(edge, true);
+			return sb.createVertexTemplateFromCells([cell, edge], 30, 90, 'Comienzo');
+	    	*/
+      return sb.createVertexTemplateFromCells([cell], 30, 90, "Comienzo");
+    }),
+    this.addEntry("uml activity state", function () {
+      var cell = new mxCell(
+        "Actividad",
+        new mxGeometry(0, 0, 120, 40),
+        "rounded=0;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffff;strokeColor=#000000;fontSize=13"
+      );
+      cell.vertex = true;
+      return sb.createVertexTemplateFromCells([cell], 120, 100, "Actividad");
+    }),
+
+    this.addEntry("uml activity condition", function () {
+      var cell = new mxCell(
+        "Condición",
+        new mxGeometry(0, 0, 100, 80),
+        "shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=13;fontColor=#000000"
+      );
+      cell.vertex = true;
+
+      var edge1 = new mxCell(
+        "No",
+        new mxGeometry(0, 0, 0, 0),
+        "edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;fontSize=13"
+      );
+      edge1.geometry.setTerminalPoint(new mxPoint(160, 40), false);
+      edge1.geometry.relative = true;
+      edge1.geometry.x = -1;
+      edge1.edge = true;
+
+      cell.insertEdge(edge1, true);
+
+      var edge2 = new mxCell(
+        "Si",
+        new mxGeometry(0, 0, 0, 0),
+        "edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=top;endArrow=open;endSize=8;strokeColor=#000000;fontSize=13"
+      );
+      edge2.geometry.setTerminalPoint(new mxPoint(50, 120), false);
+      edge2.geometry.relative = true;
+      edge2.geometry.x = -1;
+      edge2.edge = true;
+
+      cell.insertEdge(edge2, true);
+
+      return sb.createVertexTemplateFromCells(
+        [cell, edge1, edge2],
+        300,
+        100,
+        "Condición"
+      );
+    }),
+    this.addEntry("uml activity fork join", function () {
+      var cell = new mxCell(
+        "",
+        new mxGeometry(0, 0, 200, 10),
+        "shape=line;html=1;strokeWidth=6;strokeColor=#000000;fontSize=13"
+      );
+      cell.vertex = true;
+
+      var edge = new mxCell(
+        "",
+        new mxGeometry(0, 0, 0, 0),
+        "edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;fontSize=13"
+      );
+      edge.geometry.setTerminalPoint(new mxPoint(100, 80), false);
+      edge.geometry.relative = true;
+      edge.edge = true;
+
+      cell.insertEdge(edge, true);
+
+      return sb.createVertexTemplateFromCells(
+        [cell, edge],
+        200,
+        80,
+        "Bifurcar/Unir"
+      );
+    }),
+    this.addEntry("uml activity fork joinV", function () {
+      var cell = new mxCell(
+        "",
+        new mxGeometry(0, 0, 200, 10),
+        "shape=line;html=1;horizontal=0;strokeWidth=6;strokeColor=#000000;fontSize=13"
+      );
+      cell.vertex = true;
+
+      var edge = new mxCell(
+        "",
+        new mxGeometry(0, 0, 0, 0),
+        "edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;fontSize=13"
+      );
+      edge.geometry.setTerminalPoint(new mxPoint(100, 80), false);
+      edge.geometry.relative = true;
+      edge.edge = true;
+
+      cell.insertEdge(edge, true);
+
+      return sb.createVertexTemplateFromCells(
+        [cell, edge],
+        200,
+        80,
+        "Bifurcar/Unir"
+      );
+    }),
+
+    this.createVertexTemplateEntry(
+      "ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;",
+      30,
+      30,
+      "",
+      "Fin",
+      null,
+      null,
+      "uml activity state end"
+    ),
+
+    this.createVertexTemplateEntry(
+      "swimlane;html=1;horizontal=0;verticalAlign=top;strokeColor=#000000;fontSize=13;startSize=20;whiteSpace=wrap;fillColor=none;dashed=1",
+      520,
+      400,
+      "Piscina ",
+      "Piscina Horizontal",
+      null,
+      null,
+      "piscina"
+    ),
+    this.createVertexTemplateEntry(
+      "swimlane;html=1;horizontal=0;verticalAlign=top;strokeColor=#000000;fontSize=13;swimlaneLine=0;whiteSpace=wrap;fillColor=none;dashed=1",
+      500,
+      200,
+      "Carril",
+      "Carril Horizontal",
+      null,
+      null,
+      "carril"
+    ),
+    this.createVertexTemplateEntry(
+      "swimlane;html=1;horizontal=1;verticalAlign=top;strokeColor=#000000;fontSize=13;startSize=20;whiteSpace=wrap;fillColor=none;dashed=1",
+      400,
+      520,
+      "Piscina ",
+      "Piscina Vertical",
+      null,
+      null,
+      "piscina"
+    ),
+    this.createVertexTemplateEntry(
+      "swimlane;html=1;horizontal=1;verticalAlign=top;strokeColor=#000000;fontSize=13;swimlaneLine=0;whiteSpace=wrap;fillColor=none;dashed=1",
+      200,
+      500,
+      "Carril",
+      "Carril Vertical",
+      null,
+      null,
+      "carril"
+    ),
+  ];
+
+  this.addPaletteFunctions(
+    "uml",
+    "Diagrama de actividades",
+    expand || false,
+    fns
+  );
+};
+
+/**
+* Adds the HU palette to the sidebar.
+*/
+Sidebar.prototype.addHUPallete = function (expand) {
+ // Avoids having to bind all functions to "this"
+ var sb = this;
+
+ // Reusable cells
+ var field = new mxCell(
+   "+ field: type",
+   new mxGeometry(0, 0, 200, 26),
+   "text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;"
+ );
+ field.vertex = true;
+
+ var divider = new mxCell(
+   "",
+   new mxGeometry(0, 0, 40, 8),
+   "line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;"
+ );
+ divider.vertex = true;
+
+ // Default tags
+ var dt = "uml static class ";
+
+ var fns = [
+   this.createVertexTemplateEntry(
+     "shape=umlFrame;whiteSpace=wrap;html=1;lanecolor=#000000;linewidth=2",
+     450,
+     250,
+     "<b>Épica</b>:",
+     "Épica de HU",
+     null,
+     null,
+     "Epica de HU"
+   ),
+   this.createVertexTemplateEntry(
+     "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13",
+     200,
+     100,
+     "<b>HU N°1</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
+     "Historia 1",
+     null,
+     null,
+     "historia de usuario"
+   ),
+   this.createVertexTemplateEntry(
+     "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13",
+     200,
+     100,
+     "<b>HU N°2</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
+     "Historia 2",
+     null,
+     null,
+     "historia de usuario"
+   ),
+   this.createVertexTemplateEntry(
+     "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13",
+     200,
+     100,
+     "<b>HU N°3</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
+     "Historia 3",
+     null,
+     null,
+     "historia de usuario"
+   ),
+   this.createVertexTemplateEntry(
+     "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13",
+     200,
+     100,
+     "<b>HU N°4</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
+     "Historia 4",
+     null,
+     null,
+     "historia de usuario"
+   ),
+   this.createVertexTemplateEntry(
+     "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13",
+     200,
+     100,
+     "<b>HU N°5</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
+     "Historia 5",
+     null,
+     null,
+     "historia de usuario"
+   ),
+   this.createVertexTemplateEntry(
+     "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13",
+     200,
+     100,
+     "<b>HU N°6</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
+     "Historia 6",
+     null,
+     null,
+     "historia de usuario"
+   ),
+ ];
+
+ this.addPaletteFunctions("HU", "Historias de usuario", expand || true, fns);
+};
+
+/**
+ * Adds the HUmini palette to the sidebar.
+ */
+ Sidebar.prototype.addHUMiniPallete = function (expand) {
+  // Avoids having to bind all functions to "this"
+  var sb = this;
+
+  // Reusable cells
+  var field = new mxCell(
+    "+ field: type",
+    new mxGeometry(0, 0, 200, 26),
+    "text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;"
+  );
+  field.vertex = true;
+
+  var divider = new mxCell(
+    "",
+    new mxGeometry(0, 0, 40, 8),
+    "line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;"
+  );
+  divider.vertex = true;
+
+  // Default tags
+  var dt = "Miniaturas HU ";
+
+  var fns = [
+    this.createVertexTemplateEntry(
+      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
+      35,
+      22,
+      "<b>HU1</b>",
+      "Historia 1",
+      null,
+      null,
+      "historia de usuario"
+    ),
+    this.createVertexTemplateEntry(
+      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
+      40,
+      25,
+      "<b>HU2</b>",
+      "Historia 2",
+      null,
+      null,
+      "historia de usuario"
+    ),
+    this.createVertexTemplateEntry(
+      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
+      40,
+      25,
+      "<b>HU3</b>",
+      "Historia 3",
+      null,
+      null,
+      "historia de usuario"
+    ),
+    this.createVertexTemplateEntry(
+      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
+      40,
+      25,
+      "<b>HU4</b>",
+      "Historia 4",
+      null,
+      null,
+      "historia de usuario"
+    ),
+    this.createVertexTemplateEntry(
+      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
+      40,
+      25,
+      "<b>HU5</b>",
+      "Historia 5",
+      null,
+      null,
+      "historia de usuario"
+    ),
+    this.createVertexTemplateEntry(
+      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
+      40,
+      25,
+      "<b>HU6</b>",
+      "Historia 6",
+      null,
+      null,
+      "historia de usuario"
+    ),
+    this.createVertexTemplateEntry(
+      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
+      45,
+      25,
+      "<b>HU22</b>",
+      "Historia 10",
+      null,
+      null,
+      "historia de usuario"
+    ),
+  ];
+
+  this.addPaletteFunctions("HUMini", "Miniaturas HU", expand || true, fns);
+};
+
 /**
  * Adds the general palette to the sidebar.
  */
@@ -1997,406 +2409,7 @@ Sidebar.prototype.createAdvancedShapes = function () {
     }),
   ];
 };
-/**
- * Adds the HU palette to the sidebar.
- */
-Sidebar.prototype.addHUPallete = function (expand) {
-  // Avoids having to bind all functions to "this"
-  var sb = this;
 
-  // Reusable cells
-  var field = new mxCell(
-    "+ field: type",
-    new mxGeometry(0, 0, 200, 26),
-    "text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;"
-  );
-  field.vertex = true;
-
-  var divider = new mxCell(
-    "",
-    new mxGeometry(0, 0, 40, 8),
-    "line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;"
-  );
-  divider.vertex = true;
-
-  // Default tags
-  var dt = "uml static class ";
-
-  var fns = [
-    this.createVertexTemplateEntry(
-      "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13",
-      200,
-      100,
-      "<b>HU N°1</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
-      "Historia 1",
-      null,
-      null,
-      "historia de usuario"
-    ),
-    this.createVertexTemplateEntry(
-      "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13",
-      200,
-      100,
-      "<b>HU N°2</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
-      "Historia 2",
-      null,
-      null,
-      "historia de usuario"
-    ),
-    this.createVertexTemplateEntry(
-      "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13",
-      200,
-      100,
-      "<b>HU N°3</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
-      "Historia 3",
-      null,
-      null,
-      "historia de usuario"
-    ),
-    this.createVertexTemplateEntry(
-      "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13",
-      200,
-      100,
-      "<b>HU N°4</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
-      "Historia 4",
-      null,
-      null,
-      "historia de usuario"
-    ),
-    this.createVertexTemplateEntry(
-      "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13",
-      200,
-      100,
-      "<b>HU N°5</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
-      "Historia 5",
-      null,
-      null,
-      "historia de usuario"
-    ),
-    this.createVertexTemplateEntry(
-      "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13",
-      200,
-      100,
-      "<b>HU N°6</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
-      "Historia 6",
-      null,
-      null,
-      "historia de usuario"
-    ),
-  ];
-
-  this.addPaletteFunctions("HU", "Historias de usuario", expand || true, fns);
-};
-/**
- * Adds the HUmini palette to the sidebar.
- */
-Sidebar.prototype.addHUMiniPallete = function (expand) {
-  // Avoids having to bind all functions to "this"
-  var sb = this;
-
-  // Reusable cells
-  var field = new mxCell(
-    "+ field: type",
-    new mxGeometry(0, 0, 200, 26),
-    "text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;"
-  );
-  field.vertex = true;
-
-  var divider = new mxCell(
-    "",
-    new mxGeometry(0, 0, 40, 8),
-    "line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;"
-  );
-  divider.vertex = true;
-
-  // Default tags
-  var dt = "Miniaturas HU ";
-
-  var fns = [
-    this.createVertexTemplateEntry(
-      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
-      40,
-      25,
-      "<b>HU1</b>",
-      "Historia 1",
-      null,
-      null,
-      "historia de usuario"
-    ),
-    this.createVertexTemplateEntry(
-      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
-      40,
-      25,
-      "<b>HU2</b>",
-      "Historia 2",
-      null,
-      null,
-      "historia de usuario"
-    ),
-    this.createVertexTemplateEntry(
-      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
-      40,
-      25,
-      "<b>HU3</b>",
-      "Historia 3",
-      null,
-      null,
-      "historia de usuario"
-    ),
-    this.createVertexTemplateEntry(
-      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
-      40,
-      25,
-      "<b>HU4</b>",
-      "Historia 4",
-      null,
-      null,
-      "historia de usuario"
-    ),
-    this.createVertexTemplateEntry(
-      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
-      40,
-      25,
-      "<b>HU5</b>",
-      "Historia 5",
-      null,
-      null,
-      "historia de usuario"
-    ),
-    this.createVertexTemplateEntry(
-      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
-      40,
-      25,
-      "<b>HU6</b>",
-      "Historia 6",
-      null,
-      null,
-      "historia de usuario"
-    ),
-    this.createVertexTemplateEntry(
-      "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
-      45,
-      25,
-      "<b>HU22</b>",
-      "Historia 10",
-      null,
-      null,
-      "historia de usuario"
-    ),
-  ];
-
-  this.addPaletteFunctions("HUMini", "Miniaturas HU", expand || true, fns);
-};
-/**
- * Adds the UML2 palette to the sidebar.
- */
-Sidebar.prototype.addUmlPalette = function (expand) {
-  // Avoids having to bind all functions to "this"
-  var sb = this;
-
-  // Reusable cells
-  var field = new mxCell(
-    "+ field: type",
-    new mxGeometry(0, 0, 100, 26),
-    "text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;"
-  );
-  field.vertex = true;
-
-  var divider = new mxCell(
-    "",
-    new mxGeometry(0, 0, 40, 8),
-    "line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;"
-  );
-  divider.vertex = true;
-
-  // Default tags
-  var dt = "uml static class ";
-
-  var fns = [
-    this.addEntry("uml activity state start", function () {
-      var cell = new mxCell(
-        "",
-        new mxGeometry(0, 0, 30, 30),
-        "ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#000000;fontColor=#000000"
-      );
-      cell.vertex = true;
-
-      var edge = new mxCell(
-        "",
-        new mxGeometry(0, 0, 0, 0),
-        "edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;fontColor=#000000"
-      );
-      /*
-			edge.geometry.setTerminalPoint(new mxPoint(15, 90), false);
-			edge.geometry.relative = true;
-			edge.edge = true;
-			cell.insertEdge(edge, true);
-			return sb.createVertexTemplateFromCells([cell, edge], 30, 90, 'Comienzo');
-	    	*/
-      return sb.createVertexTemplateFromCells([cell], 30, 90, "Comienzo");
-    }),
-    this.addEntry("uml activity state", function () {
-      var cell = new mxCell(
-        "Actividad",
-        new mxGeometry(0, 0, 120, 40),
-        "rounded=0;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffff;strokeColor=#000000;fontSize=13"
-      );
-      cell.vertex = true;
-      return sb.createVertexTemplateFromCells([cell], 120, 100, "Actividad");
-    }),
-
-    this.addEntry("uml activity condition", function () {
-      var cell = new mxCell(
-        "Condición",
-        new mxGeometry(0, 0, 100, 80),
-        "shape=rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=13;fontColor=#000000"
-      );
-      cell.vertex = true;
-
-      var edge1 = new mxCell(
-        "No",
-        new mxGeometry(0, 0, 0, 0),
-        "edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;fontSize=13"
-      );
-      edge1.geometry.setTerminalPoint(new mxPoint(160, 40), false);
-      edge1.geometry.relative = true;
-      edge1.geometry.x = -1;
-      edge1.edge = true;
-
-      cell.insertEdge(edge1, true);
-
-      var edge2 = new mxCell(
-        "Si",
-        new mxGeometry(0, 0, 0, 0),
-        "edgeStyle=orthogonalEdgeStyle;html=1;align=left;verticalAlign=top;endArrow=open;endSize=8;strokeColor=#000000;fontSize=13"
-      );
-      edge2.geometry.setTerminalPoint(new mxPoint(50, 120), false);
-      edge2.geometry.relative = true;
-      edge2.geometry.x = -1;
-      edge2.edge = true;
-
-      cell.insertEdge(edge2, true);
-
-      return sb.createVertexTemplateFromCells(
-        [cell, edge1, edge2],
-        300,
-        100,
-        "Condición"
-      );
-    }),
-    this.addEntry("uml activity fork join", function () {
-      var cell = new mxCell(
-        "",
-        new mxGeometry(0, 0, 200, 10),
-        "shape=line;html=1;strokeWidth=6;strokeColor=#000000;fontSize=13"
-      );
-      cell.vertex = true;
-
-      var edge = new mxCell(
-        "",
-        new mxGeometry(0, 0, 0, 0),
-        "edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;fontSize=13"
-      );
-      edge.geometry.setTerminalPoint(new mxPoint(100, 80), false);
-      edge.geometry.relative = true;
-      edge.edge = true;
-
-      cell.insertEdge(edge, true);
-
-      return sb.createVertexTemplateFromCells(
-        [cell, edge],
-        200,
-        80,
-        "Bifurcar/Unir"
-      );
-    }),
-    this.addEntry("uml activity fork joinV", function () {
-      var cell = new mxCell(
-        "",
-        new mxGeometry(0, 0, 200, 10),
-        "shape=line;html=1;horizontal=0;strokeWidth=6;strokeColor=#000000;fontSize=13"
-      );
-      cell.vertex = true;
-
-      var edge = new mxCell(
-        "",
-        new mxGeometry(0, 0, 0, 0),
-        "edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#000000;fontSize=13"
-      );
-      edge.geometry.setTerminalPoint(new mxPoint(100, 80), false);
-      edge.geometry.relative = true;
-      edge.edge = true;
-
-      cell.insertEdge(edge, true);
-
-      return sb.createVertexTemplateFromCells(
-        [cell, edge],
-        200,
-        80,
-        "Bifurcar/Unir"
-      );
-    }),
-
-    this.createVertexTemplateEntry(
-      "ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;",
-      30,
-      30,
-      "",
-      "Fin",
-      null,
-      null,
-      "uml activity state end"
-    ),
-
-    this.createVertexTemplateEntry(
-      "swimlane;html=1;horizontal=0;verticalAlign=top;strokeColor=#000000;fontSize=13;startSize=20;whiteSpace=wrap;fillColor=none;dashed=1",
-      520,
-      400,
-      "Piscina ",
-      "Piscina Horizontal",
-      null,
-      null,
-      "piscina"
-    ),
-    this.createVertexTemplateEntry(
-      "swimlane;html=1;horizontal=0;verticalAlign=top;strokeColor=#000000;fontSize=13;swimlaneLine=0;whiteSpace=wrap;fillColor=none;dashed=1",
-      500,
-      200,
-      "Carril",
-      "Carril Horizontal",
-      null,
-      null,
-      "carril"
-    ),
-    this.createVertexTemplateEntry(
-      "swimlane;html=1;horizontal=1;verticalAlign=top;strokeColor=#000000;fontSize=13;startSize=20;whiteSpace=wrap;fillColor=none;dashed=1",
-      400,
-      520,
-      "Piscina ",
-      "Piscina Vertical",
-      null,
-      null,
-      "piscina"
-    ),
-    this.createVertexTemplateEntry(
-      "swimlane;html=1;horizontal=1;verticalAlign=top;strokeColor=#000000;fontSize=13;swimlaneLine=0;whiteSpace=wrap;fillColor=none;dashed=1",
-      200,
-      500,
-      "Carril",
-      "Carril Vertical",
-      null,
-      null,
-      "carril"
-    ),
-  ];
-
-  this.addPaletteFunctions(
-    "uml",
-    "Diagrama de actividades",
-    expand || false,
-    fns
-  );
-};
 
 /**
  * Adds the BPMN library to the sidebar.

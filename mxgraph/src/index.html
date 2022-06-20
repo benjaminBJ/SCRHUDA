@@ -36,7 +36,6 @@
             }
           }
         }
-
         return result;
       })(window.location.href);
 
@@ -191,8 +190,9 @@
               new ConvergenceCollaborationController(
                 MxGraphConfig.CONVERGENCE_URL
               );
-
-            collaborationController.connect().then(() => {
+            const nombre = "";
+            
+            collaborationController.connect(nombre).then(() => {
               const diagramController =
                 collaborationController.createEditorController();
               diagramController.init();
@@ -200,7 +200,7 @@
           },
           function () {
             document.body.innerHTML =
-              '<center style="margin-top:10%;">Error loading resource files. Please check browser console.</center>';
+              '<center style="margin-top:10%;">Error cargando los recursos. Favor revisar consola del navegador.</center>';
           }
         );
       })();

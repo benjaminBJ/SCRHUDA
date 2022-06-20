@@ -9,6 +9,7 @@
 }
 
 .chat-badge {
+  
   font-family: Sans-serif;
   position: relative;
   top: -3px;
@@ -54,12 +55,12 @@
   align-items: center;
   padding: 4px;
   width: 200px;
-  background-color: #fea974;
+  background-color:#fea974;
 }
 
 .chat-icon-open {
   font-family: Sans-serif;
-  background: darkgray;
+  background: #ff752b;
   color: white;
 }
 
@@ -75,6 +76,7 @@
   z-index: 4000;
   display: flex;
   flex-direction: column;
+  border-radius: 15px 15px 0px 0px;
 }
 
 .chat-window-title {
@@ -88,6 +90,8 @@
   line-height: 20px;
   height: 20px;
   text-shadow: 0 -1px 0 #000;
+  border-radius: 15px 15px 0px 0px;
+
 }
 
 .chat-window-close {

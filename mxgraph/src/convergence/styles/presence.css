@@ -41,5 +41,8 @@
   display: inline-block;
 }
 .edit {
-  position: static;
+  display: inline-block;
+  height: 20px;
+  width: 50px;
+  margin-left: 20px;
 }
