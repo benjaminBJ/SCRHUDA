@@ -1,12 +1,14 @@
 .share-controls {
   display: inline-block;
   float: right;
-  margin-right: 10px;
-  background-color: #ffffff;
+  margin-right: 50px;
+  width: 140px;
+  background-color: #5eb805;
+
 }
 
 .share-controls i {
   font-size: 16px;
   margin-top: 4px;
-  margin-left: 2px;
+  background-color: #5eb805;
 }

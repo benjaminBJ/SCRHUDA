@@ -101,8 +101,9 @@ Sidebar.prototype.init = function () {
   this.addHUMiniPallete(true);
   this.addGeneralPalette(false);
   this.addBpmnPalette(dir, false);
+  this.addMiscPalette(false);
   //Solo queremos para diagramar actividades
-  /**this.addMiscPalette(false);
+  /**
 	this.addAdvancedPalette(false);
 	this.addBasicPalette(dir);
 	this.addStencilPalette('arrows', mxResources.get('arrows'), dir + '/arrows.xml',
@@ -1202,10 +1203,10 @@ Sidebar.prototype.addHUPallete = function (expand) {
      "historia de usuario"
    ),
    this.createVertexTemplateEntry(
-     "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13",
+     "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13;overflow=hidden;",
      200,
      100,
-     "<b>HU N°6</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
+     "<b>HU N°6</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i> <b>para</b>  <i>OBJETIVO</i>",
      "Historia 6",
      null,
      null,
@@ -1254,8 +1255,8 @@ Sidebar.prototype.addHUPallete = function (expand) {
     ),
     this.createVertexTemplateEntry(
       "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
-      40,
-      25,
+      35,
+      22,
       "<b>HU2</b>",
       "Historia 2",
       null,
@@ -1264,8 +1265,8 @@ Sidebar.prototype.addHUPallete = function (expand) {
     ),
     this.createVertexTemplateEntry(
       "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
-      40,
-      25,
+      35,
+      22,
       "<b>HU3</b>",
       "Historia 3",
       null,
@@ -1274,8 +1275,8 @@ Sidebar.prototype.addHUPallete = function (expand) {
     ),
     this.createVertexTemplateEntry(
       "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
-      40,
-      25,
+      35,
+      22,
       "<b>HU4</b>",
       "Historia 4",
       null,
@@ -1284,8 +1285,8 @@ Sidebar.prototype.addHUPallete = function (expand) {
     ),
     this.createVertexTemplateEntry(
       "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
-      40,
-      25,
+      35,
+      22,
       "<b>HU5</b>",
       "Historia 5",
       null,
@@ -1294,8 +1295,8 @@ Sidebar.prototype.addHUPallete = function (expand) {
     ),
     this.createVertexTemplateEntry(
       "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
-      40,
-      25,
+      35,
+      22,
       "<b>HU6</b>",
       "Historia 6",
       null,
@@ -1304,8 +1305,8 @@ Sidebar.prototype.addHUPallete = function (expand) {
     ),
     this.createVertexTemplateEntry(
       "shape=square;whiteSpace=wrap;html=1;size=14;verticalAlign=center;align=center;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=16",
-      45,
-      25,
+      42,
+      22,
       "<b>HU22</b>",
       "Historia 10",
       null,
@@ -1775,6 +1776,7 @@ Sidebar.prototype.addMiscPalette = function (expand) {
         );
       })
     ),
+    //REVISAR
     this.addEntry(
       "timestamp date time text label",
       mxUtils.bind(this, function () {

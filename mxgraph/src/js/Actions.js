@@ -1117,7 +1117,7 @@ Actions.prototype.init = function () {
 
     //graph.openLink(RESOURCES_PATH + '/help' + ext + '.html');
     graph.openLink(
-      "https://frontend.turing.edu/lessons/module-3/user-stories.html"
+      "https://linktr.ee/scrhuda"
     );
   });
 

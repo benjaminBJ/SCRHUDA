@@ -165,6 +165,7 @@ class ConvergenceEditorController {
       document.body.appendChild(this._chatControl.getElement());
 
       //intento
+      /*
       this._huControl = new HUControl({
         room: this._room,
         username: this._domain.session().user().displayName,
@@ -174,6 +175,7 @@ class ConvergenceEditorController {
 
       document.body.appendChild(this._huControl.getElement());
       //fin intento
+      */
 
       /*intento login
         this._login = new LoginDialog({

@@ -7,7 +7,7 @@ class ShareControls extends UiComponent {
 
   _init() {
     this._share = $(
-      '<span class="geButton" title="Obtener Enlace Compartible"><i class="fa fa-share-square"></i></span>'
+      '<span class="geButton" title="Obtener Enlace Compartible"><i class="fa fa-share-square" >COLABORAR</i></span>'
     );
     this._el.append(this._share);
     this._share.on("click", () => {
@@ -47,7 +47,7 @@ class ShareControls extends UiComponent {
         hideMethod: "fadeOut",
       };
     });
-
+    /*
     this._new = $(
       '<span class="geButton" title="ABrir diagrama en otra Ventana"><i class="fa fa-external-link-alt"></i></span>'
     );
@@ -55,5 +55,6 @@ class ShareControls extends UiComponent {
     this._new.on("click", () => {
       window.open(window.location.href, "_blank");
     });
+    */
   }
 }
