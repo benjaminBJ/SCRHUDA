@@ -1206,7 +1206,7 @@ Sidebar.prototype.addHUPallete = function (expand) {
      "shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;fillColor=#fffca3;strokeColor=#000000;fontColor=#000000;fontSize=13;overflow=hidden;",
      200,
      100,
-     "<b>HU N°6</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i> <b>para</b>  <i>OBJETIVO</i>",
+     "<b>HU N°6</b>: <i>TÍTULO</i>\n\n<b>Como</b>  <i>ROL</i> \n <b>quiero</b>  <i>ACCION</i>\n<b>para</b>  <i>OBJETIVO</i>",
      "Historia 6",
      null,
      null,

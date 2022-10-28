@@ -7,7 +7,7 @@ class ShareControls extends UiComponent {
 
   _init() {
     this._share = $(
-      '<span class="geButton" title="Obtener Enlace Compartible"><i class="fa fa-share-square" >COLABORAR</i></span>'
+      '<span class="geButton" title="Obtener Enlace Compartible" ><i class="fa fa-share-square" border=2px solid black>COLABORAR</i></span>'
     );
     this._el.append(this._share);
     this._share.on("click", () => {
