@@ -3,7 +3,7 @@
 Sistema colaborativo para la redaccion de historias de usuario guiado por diagrama de actividades. Utiliza el motor backend de Convergence, que corre en un contenedor Docker y la vista de MxGraph desplegado con el sistema de paquetes npm de Node.js.
 <p float="center">
   <img src="https://convergence.io/assets/img/convergence-logo.png" height="75"/>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Diagrams.net_Logo.svg"height="75"/>
+  <img src="https://jgraph.github.io/mxgraph/docs/images/mxgraph_logo.gif"height="75"/>
 </p>
 
 La vista de MxGraph ha sido modificada para entregar el ambiente adecuado a la construcción de diagrama de actividades y la redacción de historias de usuario.
@@ -17,7 +17,7 @@ La vista de MxGraph ha sido modificada para entregar el ambiente adecuado a la c
 
 ## Ejecutar la webapp
 
-### Para la vista
+### Para la vista (mxgraph/)
 - ejecutar el comando `npm install`
 - Configurar la dirección del contenedor Convergence en `mxgraph.config.js`
 - ejecutar el comando `npm start`
@@ -25,10 +25,10 @@ La vista de MxGraph ha sido modificada para entregar el ambiente adecuado a la c
 ### Para el motor Convergence
 - Ejecutar el contenedor Docker del Convergence omnibus con el comando 
  `docker run --nameConvergence" -p "8000:80" convergencelabs/convergence-omnibus`
- - Abrir en `http://localhost`
-
+ 
 ## Resultado
-![imagen](https://user-images.githubusercontent.com/54908517/170595323-92e3cb21-f943-48d6-92cf-b7ed2cf21071.png)
+- Abrir en la dirección que entregue la consola, puede ser `http://localhost` más algun puerto
+![imagen](https://user-images.githubusercontent.com/54908517/198812607-e6c184e7-24a2-4b65-820d-910531df44e4.png)
 
 ## Colores
 - #2f5bb7
